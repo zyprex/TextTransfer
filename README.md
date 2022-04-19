@@ -1,6 +1,6 @@
 # TextTransfer
 
-![https://img.shields.io/badge/license-GPL--3.0--or--later-blue]()
+![](https://img.shields.io/badge/license-GPL--3.0--or--later-blue)
 
 Android app that transfer text (or file) via a http server in Local Wi-Fi network.
 
