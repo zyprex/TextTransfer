@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8" />
+<style>
+html{overflow:hidden;height:100%;text-align:center;}
+body{width:100%;position:absolute;top:10%;bottom:0;margin:auto;font-size:1.5rem;}
+a{text-decoration:none;}
+.lds-dual-ring {
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+}
+.lds-dual-ring:after {
+  content: " ";
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border-radius: 50%;
+  border: 6px solid #48ff48;
+  border-color: #48ff48 transparent #48ff48 transparent;
+  animation: lds-dual-ring 1.2s linear infinite;
+}
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(720deg);
+  }
+}
+</style>
+</head>
+<body>
+    <div id="p1">
+        <h3><a href="/">Upload File</a></h3>
+        <form accept-charset="UTF-8" enctype="multipart/form-data" method="post" onsubmit="return submitAction()" action="/upload/">
+            <input id="file_chooser" name="file" type="file" size="50" maxlength="1074790400" />
+            <input id="submit_button" type="submit" value="Upload" />
+            <input hidden="true" id="file_name" name="file_name" type="text" value=""/>
+        </form>
+    </div>
+    <div hidden="true" id="p2"><div class="lds-dual-ring"></div><p>Uploading ...</p></div>
+<script>
+ function submitAction() {
+     /* show loading animation */
+     document.getElementById("p1").hidden = true;
+     document.getElementById("p2").hidden = false;
+     /* parser file name, the parameter file_name is the decent file name, uri encoded  */
+     var s = document.getElementById("file_chooser").value.toString();
+     document.getElementById("file_name").value = encodeURIComponent(s.substring(s.lastIndexOf("\\") + 1));
+     /* submit form */
+     return true;
+ }
+ document.getElementById("file_chooser").onchange = function (event) {
+     var fileList = event.target.files;
+     if (fileList[0].size > 107479400) {
+         alert("File size large than 1025MiB, too big to upload!");
+         this.value = "";
+     }
+ };
+</script>
+</body>
+</html>

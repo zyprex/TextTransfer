@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/open_in_browser"
+        android:title="@string/open_in_browser"
+        android:icon="@mipmap/open_out_512x512"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/server_port"
+        android:title="@string/server_port"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/access_path"
+        android:title="@string/access_path"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/about"
+        android:title="@string/about"
+        app:showAsAction="never" />
+</menu>

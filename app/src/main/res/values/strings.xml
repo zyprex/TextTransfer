@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">TextTransfer</string>
+    <string name="open_in_browser">Open in Browser</string>
+    <string name="server_port">Server Port</string>
+    <string name="access_path">Access Path</string>
+    <string name="about">About</string>
+</resources>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:background="#888888"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/image_view_icon"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@mipmap/tt_512x512"
+        android:contentDescription="icon" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="monospace"
+        android:textColor="@color/white"
+        android:layout_below="@+id/image_view_icon"
+        android:text="About: TextTransfer, Created on 2022.4.8. Simple text/file transfer by Wi-Fi network. Use nanohttpd as http server."
+        />
+
+</RelativeLayout>

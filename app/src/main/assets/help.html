@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>TextTransfer Web Client</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+ html{line-height:1.5rem;}
+ kbd{
+  color:white;
+  background-color:black;
+  border:1px solid black;
+  border-radius:4px;
+  margin:4px 3px 4px 1px;
+  width:5rem;
+  text-align:center;
+  font-weight:300;
+  font-family:sans-serif;
+ }
+ code{border:2px solid #878767;border-radius:3px;padding:1px;margin-left:4px;margin-right:4px;}
+</style>
+</head>
+<body>
+<h1>TextTransfer</h1>
+<h2>QUICK HELP</h2>
+<ol>
+<li>Let all devices connected to same Wi-Fi network.</li>
+<li>Use the switch to turn on http server.</li>
+<li>Check the app's notification. Open Webpage link address which is showing in notification bar.</li>
+<li>Click button line below start type. After finish typing, click <kbd>Submit</kbd></li>
+<li>On any other device's web browser, click <kbd>Refresh</kbd>, the text should appeared.</li>
+</ol>
+<h2>User Guide In Detail</h2>
+<h3>Uri Class</h3>
+<h4>GET method</h4>
+<ul>
+<li><code>/</code> text transfer page</li>
+<li><code>/r/</code> return raw text</li>
+<li><code>/f/</code> list of file in root directory</li>
+<li><code>/f?p=/sdcard</code> list of file in directory 'sdcard'</li>
+<li><code>/u/</code> upload file page</li>
+</ul>
+<h4>POST method</h4>
+<ul>
+<li><code>/?text=FindMe</code> synchronize text "FindMe" to http server</li>
+<li><code>/upload/</code> upload result page</li>
+</ul>
+<h3>Text Transfer Interface</h3>
+<p>This is the main page</p>
+<ul>
+    <li><kbd>Submit</kbd>: Synchronize text to http server</li>
+    <li><kbd>Refresh</kbd>: Get text from http server</li>
+    <li><kbd>Files</kbd>: View file list on server's root directory
+        <ul>
+            <li>Can live view small file, such as text file and image file.</li>
+            <li>Can download file via http server.</li>
+        </ul>
+    </li>
+    <li><kbd>Upload</kbd>: Upload file to http server, and save it in 'Download' folder. Max file size is 1025 MiB.</li>
+</ul>
+<h3>File List Interface</h3>
+<h4>Browser</h4>
+<p>Click the first path to go up one level, cick <code>[HOME]</code> jump back to text transfer's main interface.</p>
+<h4>Download</h4>
+<p>Click <code>Download</code> link to download a file, or long click it save as a file. (When use external browser)</p>
+<h3>File Upload Interface</h3>
+<p>Click Title return main page</p>
+<h3>Menu Item</h3>
+<h4>Open In Browser</h4>
+<p>Open with preferable browser.</p>
+<h4>Server Port</h4>
+<p>Change http server port here, it will remember next time.</p>
+<h4>Access Path</h4>
+<p>This path used in file list view, and upload files saved here.</p>
+<h4>About</h4>
+<p>Trivial information about this program.</p>
+<h3>Minor defect</h3>
+<p>If encounter connect reset or similar problems, please try again.</p>
+</body>
+</html>
