@@ -1,9 +1,9 @@
 package com.zyprex.texttransfer;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.content.ComponentName;
 import android.content.Context;
@@ -59,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
     View rootView;
 
     private final ServiceConnection connection = new ServiceConnection() {
+
         @Override
         public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
             MainService.MyBinder myBinder = (MainService.MyBinder) iBinder;
@@ -113,19 +114,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initIPAddress() {
-/*
-        WifiManager wm = (WifiManager) getApplicationContext().getSystemService(WIFI_SERVICE);
-        if (!wm.isWifiEnabled()) {
-            Toast.makeText(this, "Please Enable the Wi-Fi first", Toast.LENGTH_SHORT).show();
-        }
-        int ipAddressInt = wm.getConnectionInfo().getIpAddress();
-        ipAddress =  String.format(Locale.getDefault(), "%d.%d.%d.%d",
-                (ipAddressInt & 0xff),
-                (ipAddressInt >> 8 & 0xff),
-                (ipAddressInt >> 16 & 0xff),
-                (ipAddressInt >> 24 & 0xff));
-        ipAddressString = "http://" + ipAddress + ":" + port;
-*/
         ipAddress = "0.0.0.0";
         try {
             for (Enumeration<NetworkInterface> enNetI = NetworkInterface.getNetworkInterfaces(); enNetI.hasMoreElements(); ) {
@@ -174,7 +162,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.about) {
            openAbout();
@@ -204,8 +192,11 @@ public class MainActivity extends AppCompatActivity {
         popView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
-                popWin.dismiss();
-                return true;
+                if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
+                    popWin.dismiss();
+                    view.performClick();
+                }
+                return false;
             }
         });
     }
@@ -336,9 +327,19 @@ public class MainActivity extends AppCompatActivity {
         MainActivity.uploadFormHTML = uploadFormHTML;
     }
 
-    @Override
+    public boolean checkServiceRunning(Class<?> serviceClass) {
+        ActivityManager manager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo serviceInfo : manager.getRunningServices(Integer.MAX_VALUE)) {
+          if (serviceClass.getName().equals(serviceInfo.service.getClassName())) {
+              return true;
+          }
+        }
+        return false;
+    }
     protected void onDestroy() {
         super.onDestroy();
-        unbindService(connection);
+        if (checkServiceRunning(MainActivity.class)) {
+            unbindService(connection);
+        }
     }
 }
